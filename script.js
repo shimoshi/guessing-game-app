@@ -3,18 +3,24 @@ var app = angular.module('myApp', []);
 app.service('myService', function() {
     var self = this;
     this.realNum = Math.floor((Math.random() * 10) + 1);
+    this.response = "Let's see if you're correct";
     this.compareNum = function(guessNum) {
         if (guessNum == self.realNum) {
             console.log("same");
+            $("body").removeClass().addClass('hot');
+            this.response = "You got it!";
         }
         else {
             console.log("different");
+            $("body").removeClass().addClass("cold");
+            this.response = "You're cold!";
         }
     }
 });
 
 app.controller('myController', function(myService) {
     this.compareNum = myService.compareNum;
+    this.response = myService.response;
 });
 
 
